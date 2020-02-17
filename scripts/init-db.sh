@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 #!/bin/bash
 
+SCRIPT_BASE_DIR=$(cd $(dirname $0); cd ../; pwd)
+FAF_DB_CONFIG_PATH="$SCRIPT_BASE_DIR/config/faf-db/faf-db.env"
+
 if [ ! -f docker-compose.yml ]; then
     echo "You are not inside faf-stack! The working directory must be the root of faf-stack."
     exit 1
@@ -32,7 +35,7 @@ kill -TERM ${log_process_id}
 echo "Waiting for faf-db-migrations"
 docker-compose run --rm faf-db-migrations migrate || { echo "Failed migrate database"; exit 1; }
 
-source config/faf-db/faf-db.env
+source $FAF_DB_CONFIG_PATH
 
 create() {
   database=$1
