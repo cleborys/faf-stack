@@ -677,8 +677,6 @@ services:
     hostname: rabbitmq.${DOMAINNAME}
     expose:
       - "15692"
-    ports:
-        - "127.0.0.1:5672:5672"
     env_file: ./config/faf-rabbitmq/faf-rabbitmq.env
     user: ${FAF_RABBITMQ_USER}
     restart: unless-stopped
